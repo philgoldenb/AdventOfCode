@@ -12,7 +12,7 @@ def window_increase_count(depths):
         depth_windows.append(window_sum)
     return(increase_count(depth_windows))
 
-with open("1a_input.txt",'r') as input:
+with open("day1_input.txt",'r') as input:
     contents = input.readlines()
     depths = list(map(int, contents))
 
