@@ -12,9 +12,10 @@ def window_increase_count(depths):
         depth_windows.append(window_sum)
     return(increase_count(depth_windows))
 
-with open("input.txt",'r') as input:
+with open("/Users/phil/repos/AdventOfCode/2021/day1/input.txt",'r') as input:
     contents = input.readlines()
-    depths = list(map(int, contents))
+
+depths = list(map(int, contents))
 
 print(increase_count(depths))
 
