@@ -1,7 +1,9 @@
-def position(instructions):
+INPUT_FILE = "/Users/phil/repos/AdventOfCode/2021/day2/input.txt"
 
-    horizontal, depth, aim = 0, 0, 0
-    for instruction in instructions:
+horizontal, depth, aim = 0, 0, 0
+
+with open(INPUT_FILE, "r") as file:
+    for instruction in file:
         direction, value = instruction.split() 
         value = int(value)
 
@@ -15,11 +17,4 @@ def position(instructions):
         else:
             raise ValueError("Invalid Direction")
 
-    return horizontal * depth
-
-input_file = "/Users/phil/repos/AdventOfCode/2021/day2/input.txt"
-with open(input_file,"r") as file:
-    instructions = file.readlines()
-
-
-print(position(instructions))
+    print (horizontal * depth)
