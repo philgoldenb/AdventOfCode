@@ -1,3 +1,5 @@
+from collections import Counter
+
 INPUT_FILE = 'day3/input.txt'
 
 with open(INPUT_FILE, 'r') as file:
@@ -6,11 +8,12 @@ with open(INPUT_FILE, 'r') as file:
 gamma, epsilon = "", ""
 for i in range(len(diagnostics[0])):
 
-    counts = {"0": 0, "1": 0}
+    counts = Counter()
     for reading in diagnostics:
         counts[reading[i]] += 1
 
-    if counts["0"] > counts["1"]:
+    bit, _ = counts.most_common(1)[0]
+    if bit == "0":
         gamma += "0"
         epsilon += "1"
     else:
