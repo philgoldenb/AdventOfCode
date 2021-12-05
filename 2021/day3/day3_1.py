@@ -1,19 +1,17 @@
-from collections import Counter
+from collections import Counter, defaultdict
 
 INPUT_FILE = 'day3/input.txt'
 
-counters = []
+counters = defaultdict(Counter)
 with open(INPUT_FILE, 'r') as file:
     for line in file:
         line = line.rstrip() 
-        if not counters:
-            counters = [Counter() for _ in range(len(line))]
-        for counter, bit in zip(counters, line):
-            counter[bit] += 1
+        for col, bit in enumerate(line):
+            counters[col][bit] += 1
 
 gamma, epsilon = "", ""
-for counts in counters:
-    bit, _ = counts.most_common(1)[0]
+for col in range(len(line)):
+    bit, _ = counters[col].most_common(1)[0]
     if bit == "0":
         gamma += "0"
         epsilon += "1"
