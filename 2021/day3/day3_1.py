@@ -4,14 +4,11 @@ INPUT_FILE = 'day3/input.txt'
 
 with open(INPUT_FILE, 'r') as file:
     diagnostics = [line.rstrip() for line in file]
+columns = zip(*diagnostics)
 
 gamma, epsilon = "", ""
-for i in range(len(diagnostics[0])):
-
-    counts = Counter()
-    for reading in diagnostics:
-        counts[reading[i]] += 1
-
+for column in columns:
+    counts = Counter(column)
     bit, _ = counts.most_common(1)[0]
     if bit == "0":
         gamma += "0"
