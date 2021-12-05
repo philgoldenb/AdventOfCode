@@ -2,13 +2,17 @@ from collections import Counter
 
 INPUT_FILE = 'day3/input.txt'
 
+counters = []
 with open(INPUT_FILE, 'r') as file:
-    diagnostics = [line.rstrip() for line in file]
-columns = zip(*diagnostics)
+    for line in file:
+        line = line.rstrip() 
+        if not counters:
+            counters = [Counter() for _ in range(len(line))]
+        for counter, bit in zip(counters, line):
+            counter[bit] += 1
 
 gamma, epsilon = "", ""
-for column in columns:
-    counts = Counter(column)
+for counts in counters:
     bit, _ = counts.most_common(1)[0]
     if bit == "0":
         gamma += "0"
