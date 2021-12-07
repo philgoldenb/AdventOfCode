@@ -6,20 +6,6 @@ with open(INPUT_FILE,'r') as file:
     oxy_contents = [line.strip() for line in file]
 co2_contents = [line for line in oxy_contents]
 
-def filt_ones(rows):
-    for line in rows:
-        if line[0] == "1":
-            return True
-        else:
-            return False
-
-def filt_zeros(rows):
-    for line in rows:
-        if line[0] == '0':
-            return True
-        else:
-            return False
-
 row_len = len(oxy_contents[0])
 
 for col in range(row_len):
