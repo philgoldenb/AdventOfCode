@@ -1,4 +1,5 @@
 from collections import Counter
+import operator
 
 INPUT_FILE = 'day3/input.txt'
 
@@ -18,8 +19,8 @@ def compute_rating(contents, filter_criteria):
     
     return contents[0]
 
-oxy_gen = compute_rating(contents, lambda ones, zeros: ones >= zeros)
-co2_gen = compute_rating(contents, lambda ones, zeros: ones < zeros)
+oxy_gen = compute_rating(contents, operator.ge)
+co2_gen = compute_rating(contents, operator.lt)
 
 print(f"oxy_gen is {oxy_gen}")
 print(f"co2_gen is {co2_gen}")
