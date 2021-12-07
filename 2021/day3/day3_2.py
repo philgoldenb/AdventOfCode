@@ -7,17 +7,14 @@ with open(INPUT_FILE,'r') as file:
     contents = file.readlines()
 
 def compute_rating(contents, filter_criteria):
-    row_len = len(contents[0])
-
-    for col in range(row_len):
-        counts = Counter(line[col] for line in contents)
+    prefix = ""
+    while len(contents) > 1:
+        counts = Counter(row[0] for row in contents)
         filter_val = "1" if filter_criteria(counts["1"], counts["0"]) else "0"
-        contents = [row for row in contents if row[col] == filter_val]
-
-        if len(contents) == 1:
-            break
-    
-    return contents[0]
+        prefix += filter_val
+        contents = [row[1:] for row in contents if row[0] == filter_val]
+        
+    return prefix + contents[0]
 
 oxy_gen = compute_rating(contents, operator.ge)
 co2_gen = compute_rating(contents, operator.lt)
