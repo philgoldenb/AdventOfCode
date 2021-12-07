@@ -3,41 +3,24 @@ from collections import Counter
 INPUT_FILE = 'day3/input.txt'
 
 with open(INPUT_FILE,'r') as file:
-    oxy_contents = [line.strip() for line in file]
-co2_contents = [line for line in oxy_contents]
+    contents = file.readlines()
 
-row_len = len(oxy_contents[0])
+row_len = len(contents[0])
 
+oxy_contents = contents
 for col in range(row_len):
-    oxy_counts = Counter()
-
-    for line in oxy_contents:
-        oxy_counts[line[col]] += 1
-
-    zeros, ones = oxy_counts["0"], oxy_counts["1"]
-
-    if ones >= zeros:
-        oxy_contents = [row for row in oxy_contents if row[col] == "1"]
-    else:
-        oxy_contents = [row for row in oxy_contents if row[col] == "0"]
-
+    counts = Counter(line[col] for line in oxy_contents)
+    most_common_val = "1" if counts["1"] >= counts["0"] else "0"
+    oxy_contents = [row for row in oxy_contents if row[col] == most_common_val]
     if len(oxy_contents) == 1:
         break
 
 
+co2_contents = contents
 for col in range(row_len):
-    
-    co2_counts = Counter()
-    for line in co2_contents:
-        co2_counts[line[col]] += 1
-    
-    zeros, ones = co2_counts["0"], co2_counts["1"]
-
-    if zeros <= ones:
-        co2_contents = [row for row in co2_contents if row[col] == "0"]
-    else:
-        co2_contents = [row for row in co2_contents if row[col] == "1"]
-    
+    counts = Counter(line[col] for line in co2_contents)
+    least_common_val = "1" if counts["1"] < counts["0"] else "0"
+    co2_contents = [row for row in co2_contents if row[col] == least_common_val]
     if len(co2_contents) == 1:
         break
 
